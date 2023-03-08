@@ -7,9 +7,9 @@ import com.sparta.myboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,8 +18,9 @@ public class BoardController {
 
     private final BoardService boardService;
     @PostMapping("/api/post")
-    public Board createBoards(@RequestBody BoardDto requestDto) {
-        return boardService.createBoard(requestDto);
+    public Board createBoards(@RequestBody BoardDto requestDto, HttpServletRequest request) {
+
+        return boardService.createBoard(requestDto,request);
     }
 
     @GetMapping("/api/posts")
@@ -30,18 +31,19 @@ public class BoardController {
 
     @GetMapping("/api/post/{id}")
     public Optional<Board> getBoard(@PathVariable Long id) {
+
         return boardService.getBoard(id);
     }
 
     @PutMapping("/api/post/{id}")
-    public Long updateBoard(@PathVariable Long id, @RequestBody BoardDto requestDto) {
-        return boardService.update(id, requestDto);
+    public Long updateBoard(@PathVariable Long id, @RequestBody BoardDto requestDto,HttpServletRequest request) {
+        return boardService.update(id, requestDto,request);
     }
 
     @DeleteMapping("/api/post/{id}")
-    public ResultDto deleteBoard(@PathVariable Long id, @RequestBody BoardDto requestDto) {
-        System.out.println(requestDto.getPassword());
-        return boardService.deleteBoard(id,requestDto.getPassword());
+    public ResultDto deleteBoard(@PathVariable Long id,HttpServletRequest request) {
+
+        return boardService.deleteBoard(id,request);
 
 
     }

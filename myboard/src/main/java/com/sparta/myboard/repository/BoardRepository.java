@@ -10,7 +10,7 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     List<Board> findAllByOrderByModifiedAtDesc();
 
     Optional<Board> findById(Long id);
-    int deleteByIdAndPassword(Long id , String password);
+    int deleteByIdAndUsername(Long id, String username );
 
-
+    Optional<Board> findByIdAndUsername(Long id, String username);
 }
