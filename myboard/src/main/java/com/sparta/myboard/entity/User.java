@@ -18,8 +18,12 @@ public class User {
     @Column(nullable = false)
     private String Password;
 
-    public User(String username, String password) {
+    @Enumerated(EnumType.STRING)
+    private RoleType RoleType;
+
+    public User(String username, String password,RoleType roleType) {
         this.username = username;
-        Password = password;
+        this.Password = password;
+        this.RoleType = roleType;
     }
 }

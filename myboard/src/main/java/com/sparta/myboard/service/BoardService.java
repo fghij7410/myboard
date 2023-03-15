@@ -56,17 +56,15 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Board> getBoard(Long id) {
-        return boardRepository.findById(id);
+    public Board getBoard(Long id) {
+        return boardRepository.findById(id).orElseThrow();
     }
 
     @Transactional
     public Long update(Long id, BoardDto requestDto,HttpServletRequest request) {
         String token = jwtUtil.resolveToken(request);
         Claims claims;
-        Board board = boardRepository.findById(id).orElseThrow(
-                () -> new NullPointerException("아이디가 존재하지 않습니다.")
-        );
+        Board board = boardRepository.findById(id).orElseThrow();
         if (token != null) {
             // Token 검증
             if (jwtUtil.validateToken(token)) {

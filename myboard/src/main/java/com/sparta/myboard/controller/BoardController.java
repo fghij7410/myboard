@@ -19,19 +19,16 @@ public class BoardController {
     private final BoardService boardService;
     @PostMapping("/api/post")
     public Board createBoards(@RequestBody BoardDto requestDto, HttpServletRequest request) {
-
         return boardService.createBoard(requestDto,request);
     }
 
     @GetMapping("/api/posts")
     public List<Board> getBoards() {
-
         return boardService.getBoards();
     }
 
     @GetMapping("/api/post/{id}")
-    public Optional<Board> getBoard(@PathVariable Long id) {
-
+    public Board getBoard(@PathVariable Long id) {
         return boardService.getBoard(id);
     }
 
@@ -42,7 +39,6 @@ public class BoardController {
 
     @DeleteMapping("/api/post/{id}")
     public ResultDto deleteBoard(@PathVariable Long id,HttpServletRequest request) {
-
         return boardService.deleteBoard(id,request);
 
 

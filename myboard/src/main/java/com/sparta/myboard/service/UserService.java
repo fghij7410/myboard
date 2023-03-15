@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+import static com.sparta.myboard.entity.RoleType.USER;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -27,7 +29,7 @@ public class UserService {
         if (found.isPresent()) {
             throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
         }
-        User user = new User(username, password);
+        User user = new User(username, password,USER);
         userRepository.save(user);
     }
 
